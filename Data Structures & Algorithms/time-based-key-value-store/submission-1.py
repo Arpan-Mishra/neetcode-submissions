@@ -1,0 +1,41 @@
+class TimeMap:
+
+    def __init__(self):
+        self.time_map = defaultdict(list)
+
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        self.time_map[key].append([timestamp, value])        
+
+    def get(self, key: str, timestamp: int) -> str:
+        
+        # get key
+        vals = self.time_map.get(key, None)
+
+        if not vals:
+            return ""
+        else:
+            l = 0
+            r = len(vals)-1
+
+            ri = vals[0][0]
+            res = ""
+            while l<=r:
+                m = (l+r)//2
+
+                if vals[m][0]<=timestamp:
+                    ri = max(ri, vals[m][0])
+                    res = vals[m][1]
+                    l = m+1
+                else:
+                    r = m-1
+            
+            return res
+
+
+
+
+
+
+        
+
+        
